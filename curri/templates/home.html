@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="jumbotron p-4">
+    <h1 class="titulo" style="text-align: center;  font-size: 50px;"><strong>Noticias.COM</strong></h1>
+    <p class="lead" style="text-align: center;">Esta es una pagina donde se mostraran un curriculum y la informacion del desarrollador a travez de django-docker</p>
+    <hr>
+    <br>
+
+    <div class="row">
+    	<img src="{% static 'files/banner2.jpg' %}" height="300px"
+    	width="1220px">
+    </div>
+    <hr>
+    <br>
+
+</div>
+
+{% endblock content %}
