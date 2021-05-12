@@ -2,5 +2,31 @@
 {% block content %}
 {% load static %}
 
+<div class="container">
+	<br>
+	<form class="form-control">
+		<center><h1>Informacion</h1><hr></center>
+		<div class="row">
+			
+				{% for info in docs_list %}
+				<div class=col-md-4>
+                    <br>
+					<p><strong>{{ info.instituto }}</strong></p><hr>
+			        <p>{{ info.nombre }}</p>
+                    <p>{{ info.historia }}</p>
+			        <p>{{ info.eventos }}</p>
+                    <br>   
+
+			        <p><a  class= "btn btn-primary btn-sm" href="{% url 'modificarInfo' info.id  %}">Modificar</a></p>
+
+			        <p><a  class= "btn btn-danger btn-sm" href="{% url 'eliminarInfo' info.id  %}">Eliminar</a></p>
+
+				</div>
+	    		{% endfor %}
+
+		</div><br>
+	</form>
+
+</div>
 
 {% endblock content %}

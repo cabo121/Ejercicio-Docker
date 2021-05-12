@@ -5,7 +5,6 @@
 	<form method="POST"> {% csrf_token %}
 		<h1>Inicie Sesion</h1><br>
 	  		{{ form.as_p }}
-	  		<a href="{% url 'reset' %}">Olvidaste tu contrasena</a><br><br>
 	  	<button type="submit" class="btn btn-primary">Iniciar</button>
 	</form>
 </div>

@@ -1,4 +1,6 @@
 from django.contrib import admin
-from .models import post
+from .models import curriculum,info
 
-admin.site.register(post)
+model = curriculum, info
+
+admin.site.register(model)

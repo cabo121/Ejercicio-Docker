@@ -2,5 +2,36 @@
 {% block content %}
 {% load static %}
 
+<div class="container">
+	<br>
+	<form class="form-control">
+		<center><h1>Curriculums</h1><hr></center>
+		<div class="row">
+			
+				{% for curriculums in docs_list %}
+				<div class=col-md-4>
+                    <br>
+					<p><strong>{{ curriculums.nombre }}</strong></p><hr>
+			        <p>{{ curriculums.telefono }}</p>
+                    <p>{{ curriculums.correo }}</p>
+			        <p>{{ curriculums.edad }}</p>
+			        <p>{{ curriculums.educacion }}</p>
+			        <p>{{ curriculums.experiencia }}</p>
+			        <p>{{ curriculums.aptitudes }}</p>
+                    <br>   
+
+			        <p><a  class= "btn btn-primary btn-sm" href="{% url 'modificar' curriculums.id  %}">Modificar</a></p>
+
+			        <p><a  class= "btn btn-danger btn-sm" href="{% url 'eliminar' curriculums.id  %}">Eliminar</a></p>
+
+				</div>
+
+				<p><a  class= "btn btn-primary btn-sm" href="{% url 'agregar' %}">Agregar</a></p>
+	    		{% endfor %}
+
+		</div><br>
+	</form>
+
+</div>
 
 {% endblock content %}
