@@ -5,26 +5,34 @@
 <div class="container">
 	<br>
 	<form class="form-control">
-		<center><h1>Informacion</h1><hr></center>
+		<center><h1>Informacion de Universidades</h1><hr></center>
 		<div class="row">
 			
 				{% for info in docs_list %}
 				<div class=col-md-4>
                     <br>
-					<p><strong>{{ info.instituto }}</strong></p><hr>
-			        <p>{{ info.nombre }}</p>
-                    <p>{{ info.historia }}</p>
-			        <p>{{ info.eventos }}</p>
-                    <br>   
+					<div class="card">
+                    	<div class="card-body">
+	                    	<center><h5><strong>{{ info.instituto }}</strong></h5><hr></center>
+							<strong><p>Ubicacion</p></strong>
+					        <p>{{ info.nombre }}</p>
+					        <strong><p>Historia</p></strong>
+		                    <p>{{ info.historia }}</p>
+		                    <strong><p>Eventos</p></strong>
+					        <p>{{ info.eventos }}</p>
+		                    <br>   
 
-			        <p><a  class= "btn btn-primary btn-sm" href="{% url 'modificarInfo' info.id  %}">Modificar</a></p>
+					        <p><a  class= "btn btn-primary btn-sm" href="{% url 'modificarInfo' info.id  %}">Modificar</a></p>
 
-			        <p><a  class= "btn btn-danger btn-sm" href="{% url 'eliminarInfo' info.id  %}">Eliminar</a></p>
+					        <p><a  class= "btn btn-danger btn-sm" href="{% url 'eliminarInfo' info.id  %}">Eliminar</a></p>
+                    	</div>
+                    </div>
 
 				</div>
 	    		{% endfor %}
 
-		</div><br>
+		</div><br><br>
+	    		<p><a  class= "btn btn-primary btn-sm" href="{% url 'agregarInfo' %}">Agregar</a></p>
 	</form>
 
 </div>

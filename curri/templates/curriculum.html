@@ -5,31 +5,39 @@
 <div class="container">
 	<br>
 	<form class="form-control">
-		<center><h1>Curriculums</h1><hr></center>
+		<center><h1>Curriculums de Alumnos</h1><hr></center>
 		<div class="row">
 			
 				{% for curriculums in docs_list %}
 				<div class=col-md-4>
                     <br>
-					<p><strong>{{ curriculums.nombre }}</strong></p><hr>
-			        <p>{{ curriculums.telefono }}</p>
-                    <p>{{ curriculums.correo }}</p>
-			        <p>{{ curriculums.edad }}</p>
-			        <p>{{ curriculums.educacion }}</p>
-			        <p>{{ curriculums.experiencia }}</p>
-			        <p>{{ curriculums.aptitudes }}</p>
-                    <br>   
+                    <div class="card">
+                    	<div class="card-body">
+	                    	<h5><strong>{{ curriculums.nombre }}</strong></h5><hr>
+							<strong><p>Telefono</p></strong>
+					        <p>{{ curriculums.telefono }}</p>
+					        <strong><p>Correo</p></strong>
+		                    <p>{{ curriculums.correo }}</p>
+		                    <strong><p>Edad</p></strong>
+					        <p>{{ curriculums.edad }}</p>
+					        <strong><p>Educacion</p></strong>
+					        <p>{{ curriculums.educacion }}</p>
+					        <strong><p>Experiencia</p></strong>
+					        <p>{{ curriculums.experiencia }}</p>
+					        <strong><p>Aptitudes</p></strong>
+					        <p>{{ curriculums.aptitudes }}</p>
+		                    <br>   
 
-			        <p><a  class= "btn btn-primary btn-sm" href="{% url 'modificar' curriculums.id  %}">Modificar</a></p>
+					        <p><a  class= "btn btn-primary btn-sm" href="{% url 'modificar' curriculums.id  %}">Modificar</a></p>
 
-			        <p><a  class= "btn btn-danger btn-sm" href="{% url 'eliminar' curriculums.id  %}">Eliminar</a></p>
-
+					        <p><a  class= "btn btn-danger btn-sm" href="{% url 'eliminar' curriculums.id  %}">Eliminar</a></p>
+                    	</div>
+                    </div>
 				</div>
-
-				<p><a  class= "btn btn-primary btn-sm" href="{% url 'agregar' %}">Agregar</a></p>
 	    		{% endfor %}
 
-		</div><br>
+		</div><br><br>
+				<p><a  class= "btn btn-primary btn-md-block" href="{% url 'agregar' %}">Agregar</a></p>
 	</form>
 
 </div>

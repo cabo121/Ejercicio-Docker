@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import (BaseUserManager, AbstractUser)
 
 class curriculum (models.Model):
 	nombre = models.CharField(default = "",null=True,max_length = 200)
@@ -20,3 +21,4 @@ class info (models.Model):
 	
 	def __str__ (self):
 		return self.instituto
+

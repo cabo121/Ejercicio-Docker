@@ -1,12 +1,14 @@
 from django.views.generic import ListView
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required, permission_required
 from .models import curriculum, info
 from django.contrib.auth.models import User
-from .forms import curriForm,infoForm
+from .forms import curriForm,infoForm, CustomUserForm
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
 
 #---------------------------------------------------------------
 
@@ -29,13 +31,13 @@ class InfoPageView(ListView):
 
 class RegistrarPageView (CreateView):
 	model = User
-	template_name = 'registrar.html'
+	template_name = 'registration/registrar.html'
 	form_class =  UserCreationForm
 	success_url = reverse_lazy('registro_success')
 
 class RegistroPageView(ListView):
 	model = info
-	template_name = 'registro_success.html'
+	template_name = 'registration/registro_success.html'
 
 class ResetPageView (CreateView):
 	model = User
@@ -45,9 +47,19 @@ class ResetPageView (CreateView):
 
 def registro_usuario (request):
 	data = {
-		'form': CustomUser()
+		'form': CustomUserForm()
 	}
-	return render(request, 'registrar.html', data)	
+
+	if request.method == 'POST':
+		formulario = CustomUserForm(data=request.POST)
+		if formulario.is_valid():
+			formulario.save()
+			data['mensaje'] = 'Guardado correctamente'
+			return redirect(to='registro_success')
+		else:
+			data['form'] = formulario
+			
+	return render(request, 'registration/registrar.html', data)	
 
 #---------------------------------------------------------------
 
@@ -61,6 +73,7 @@ def agregar (request):
 		if formulario.is_valid():
 			formulario.save()
 			data['mensaje'] = 'Guardado correctamente'
+			return redirect(to='curriculum')
 		else:
 			data['form'] = formulario
 
@@ -104,6 +117,7 @@ def agregarInfo (request):
 		if formulario.is_valid():
 			formulario.save()
 			data['mensaje'] = 'Guardado correctamente'
+			return redirect(to='info')
 		else:
 			data['form'] = formulario
 
@@ -132,3 +146,25 @@ def eliminarInfo (request, id):
 	infod.delete()
 
 	return redirect(to = "info")
+
+
+#---------------------------------------------------------------
+
+def changePassword(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('logout')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'registration/change_password.html', {
+        'form': form
+    })
+
+#---------------------------------------------------------------
+
